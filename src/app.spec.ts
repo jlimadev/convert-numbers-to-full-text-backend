@@ -1,4 +1,4 @@
-import { getCardinalNumberOf } from './app';
+import { getWrittenNumberOf } from './app';
 
 describe('Cardinal numbers test suit', () => {
   it('should get one of the units', () => {
@@ -6,7 +6,7 @@ describe('Cardinal numbers test suit', () => {
     const expectedResult = 'two';
 
     // Act
-    const result = getCardinalNumberOf(2);
+    const result = getWrittenNumberOf(2);
 
     // Assert
     expect(result).toBe(expectedResult);
