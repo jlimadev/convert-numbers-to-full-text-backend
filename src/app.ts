@@ -93,13 +93,21 @@ const getWrittenNumberOf = (n: number): string => {
         spelledOutNumber = specialNumbers.writtenNumbers[n];
         break;
       }
-      spelledOutNumber = 'Not implemented';
-      break;
+      const regularNumbers = foundNumbers.find(
+        (numbers) => !numbers.properties.isSpecial,
+      );
+
+      if (n % regularNumbers.properties.mod === 0) {
+        spelledOutNumber = regularNumbers.writtenNumbers[n];
+        break;
+      } else {
+        const lastDigit = Number(n.toString().substring(digits - 1, digits));
+        const firstDigit = Number(`${n.toString().substring(0, 1)}0`);
+        const word = getWrittenNumberOf(Number(lastDigit));
+        spelledOutNumber = `${regularNumbers.writtenNumbers[firstDigit]}-${word}`;
+        break;
+      }
     }
-    case 3:
-      break;
-    case 4:
-      break;
     default:
       break;
   }

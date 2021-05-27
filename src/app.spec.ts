@@ -42,4 +42,19 @@ describe('Cardinal numbers test suit', () => {
     expect(result[8]).toBe('eighteen');
     expect(result[9]).toBe('nineteen');
   });
+
+  it('should get from 20 to 29', () => {
+    // Arrange
+    const expectedResult = 10;
+    const range = Array.from(Array(30).keys()).filter((n) => n >= 20);
+
+    // Act
+    const result: Array<string> = [];
+    range.forEach((i) => result.push(getWrittenNumberOf(i)));
+
+    // Assert
+    expect(result.length).toBe(expectedResult);
+    expect(result[0]).toBe('twenty');
+    expect(result[1]).toBe('twenty-one');
+  });
 });
