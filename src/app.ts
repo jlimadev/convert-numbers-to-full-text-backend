@@ -74,7 +74,7 @@ const writtenNumbersArray: Array<WrittenNumbers> = [
 ];
 
 const getWrittenNumberOf = (n: number): string => {
-  let writtenNumber: string;
+  let spelledOutNumber: string;
   const digits = n.toString().length;
 
   const foundNumbers = writtenNumbersArray.filter(
@@ -83,17 +83,17 @@ const getWrittenNumberOf = (n: number): string => {
 
   switch (digits) {
     case 1:
-      writtenNumber = foundNumbers[0].writtenNumbers[n];
+      spelledOutNumber = foundNumbers[0].writtenNumbers[n];
       break;
     case 2: {
       if (n >= 10 && n < 20) {
         const specialNumbers = foundNumbers.find(
           (numbers) => numbers.properties.isSpecial,
         );
-        writtenNumber = specialNumbers.writtenNumbers[n];
+        spelledOutNumber = specialNumbers.writtenNumbers[n];
         break;
       }
-      writtenNumber = 'Not implemented';
+      spelledOutNumber = 'Not implemented';
       break;
     }
     case 3:
@@ -104,7 +104,7 @@ const getWrittenNumberOf = (n: number): string => {
       break;
   }
 
-  return writtenNumber;
+  return spelledOutNumber;
 };
 
 export { getWrittenNumberOf };
