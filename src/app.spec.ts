@@ -11,4 +11,19 @@ describe('Cardinal numbers test suit', () => {
     // Assert
     expect(result).toBe(expectedResult);
   });
+
+  it('should get from 0 to 9', () => {
+    // Arrange
+    const expectedResult = 10;
+    const range = Array.from(Array(10).keys());
+
+    // Act
+    const result: Array<string> = [];
+    range.forEach((i) => result.push(getWrittenNumberOf(i)));
+
+    // Assert
+    expect(result.length).toBe(expectedResult);
+    expect(result[0]).toBe('zero');
+    expect(result[8]).toBe('eight');
+  });
 });
