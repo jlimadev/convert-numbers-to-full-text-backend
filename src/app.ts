@@ -2,6 +2,7 @@ interface WrittenNumbers {
   properties: {
     digits: number;
     mod: number;
+    isSpecial: boolean;
   };
   writtenNumbers: {
     [n: number]: string;
@@ -12,6 +13,7 @@ const units: WrittenNumbers = {
   properties: {
     digits: 1,
     mod: 1,
+    isSpecial: false,
   },
   writtenNumbers: {
     0: 'zero',
@@ -31,6 +33,7 @@ const uniqueDozen: WrittenNumbers = {
   properties: {
     digits: 2,
     mod: 10,
+    isSpecial: true,
   },
   writtenNumbers: {
     10: 'ten',
@@ -50,6 +53,7 @@ const commonDozen: WrittenNumbers = {
   properties: {
     digits: 2,
     mod: 10,
+    isSpecial: false,
   },
   writtenNumbers: {
     20: 'twenty',
@@ -73,11 +77,32 @@ const getWrittenNumberOf = (n: number): string => {
   let writtenNumber: string;
   const digits = n.toString().length;
 
-  const numbersToIterate = writtenNumbersArray.filter(
+  const foundNumbers = writtenNumbersArray.filter(
     (writtenNumber) => writtenNumber.properties.digits == digits,
   );
 
-  writtenNumber = numbersToIterate[0].writtenNumbers[n];
+  switch (digits) {
+    case 1:
+      writtenNumber = foundNumbers[0].writtenNumbers[n];
+      break;
+    case 2: {
+      if (n >= 10 && n < 20) {
+        const specialNumbers = foundNumbers.find(
+          (numbers) => numbers.properties.isSpecial,
+        );
+        writtenNumber = specialNumbers.writtenNumbers[n];
+        break;
+      }
+      writtenNumber = 'Not implemented';
+      break;
+    }
+    case 3:
+      break;
+    case 4:
+      break;
+    default:
+      break;
+  }
 
   return writtenNumber;
 };
