@@ -1,7 +1,7 @@
-import { getWrittenNumberOf } from './app';
+import { spellOutNumber } from './app';
 
 describe('Cardinal numbers test suit', () => {
-  it('should get all units (1, 2, ..., 9)', () => {
+  it('should get all units [1, 2, ..., 9]', () => {
     // Arrange
     const result: Array<string> = [];
     const range = Array.from(Array(10).keys());
@@ -20,14 +20,14 @@ describe('Cardinal numbers test suit', () => {
     ];
 
     // Act
-    range.forEach((i) => result.push(getWrittenNumberOf(i)));
+    range.forEach((i) => result.push(spellOutNumber(i)));
 
     // Assert
     expect(result.length).toBe(expectedLength);
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get all special numbers (10, 11, ..., 19', () => {
+  it('should get all special numbers [10, 11, ..., 19]', () => {
     // Arrange
     const expectedLength = 10;
     const range = Array.from(Array(20).keys()).filter((n) => n >= 10);
@@ -46,14 +46,14 @@ describe('Cardinal numbers test suit', () => {
 
     // Act
     const result: Array<string> = [];
-    range.forEach((i) => result.push(getWrittenNumberOf(i)));
+    range.forEach((i) => result.push(spellOutNumber(i)));
 
     // Assert
     expect(result.length).toBe(expectedLength);
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get all round dozens (10, 20, ..., 90)', () => {
+  it('should get all round dozens [10, 20, ..., 90]', () => {
     // Arrange
     const hundreds = [10, 20, 30, 40, 50, 60, 70, 80, 90];
     const expectedResult = [
@@ -70,29 +70,38 @@ describe('Cardinal numbers test suit', () => {
 
     // Act
     const result: Array<string> = hundreds.map((number) =>
-      getWrittenNumberOf(number),
+      spellOutNumber(number),
     );
 
     // Assert
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get from 20 to 29', () => {
+  it('should get correctly specified dozens [20, 21, ..., 29]', () => {
     // Arrange
-    const expectedResult = 10;
     const range = Array.from(Array(30).keys()).filter((n) => n >= 20);
+    const expectedResult = [
+      'twenty',
+      'twenty-one',
+      'twenty-two',
+      'twenty-three',
+      'twenty-four',
+      'twenty-five',
+      'twenty-six',
+      'twenty-seven',
+      'twenty-eight',
+      'twenty-nine',
+    ];
 
     // Act
     const result: Array<string> = [];
-    range.forEach((i) => result.push(getWrittenNumberOf(i)));
+    range.forEach((i) => result.push(spellOutNumber(i)));
 
     // Assert
-    expect(result.length).toBe(expectedResult);
-    expect(result[0]).toBe('twenty');
-    expect(result[1]).toBe('twenty-one');
+    expect(result).toEqual(expectedResult);
   });
 
-  it('should get all round hundreds (100, 200, ..., 900)', () => {
+  it('should get all round hundreds [100, 200, ..., 900]', () => {
     // Arrange
     const hundreds = [100, 200, 300, 400, 500, 600, 700, 800, 900];
     const expectedResult = [
@@ -109,14 +118,14 @@ describe('Cardinal numbers test suit', () => {
 
     // Act
     const result: Array<string> = hundreds.map((number) =>
-      getWrittenNumberOf(number),
+      spellOutNumber(number),
     );
 
     // Assert
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get correctly the compound hundreds', () => {
+  it('should get correctly the specified compound hundreds [101, 222, ..., 912]', () => {
     // Arrange
     const numbers = [101, 222, 345, 499, 567, 666, 703, 838, 912];
     const expectedResult = [
@@ -132,7 +141,7 @@ describe('Cardinal numbers test suit', () => {
     ];
 
     // Act
-    const result = numbers.map((number) => getWrittenNumberOf(number));
+    const result = numbers.map((number) => spellOutNumber(number));
 
     // Assert
     expect(result).toEqual(expectedResult);

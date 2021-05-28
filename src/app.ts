@@ -1,4 +1,4 @@
-interface WrittenNumbers {
+interface NumbersProperties {
   properties: {
     digits: number;
     mod: number;
@@ -9,7 +9,7 @@ interface WrittenNumbers {
   };
 }
 
-const units: WrittenNumbers = {
+const units: NumbersProperties = {
   properties: {
     digits: 1,
     mod: 1,
@@ -29,7 +29,7 @@ const units: WrittenNumbers = {
   },
 };
 
-const uniqueDozen: WrittenNumbers = {
+const uniqueDozen: NumbersProperties = {
   properties: {
     digits: 2,
     mod: 10,
@@ -49,7 +49,7 @@ const uniqueDozen: WrittenNumbers = {
   },
 };
 
-const commonDozen: WrittenNumbers = {
+const commonDozen: NumbersProperties = {
   properties: {
     digits: 2,
     mod: 10,
@@ -67,7 +67,7 @@ const commonDozen: WrittenNumbers = {
   },
 };
 
-const hundreds: WrittenNumbers = {
+const hundreds: NumbersProperties = {
   properties: {
     digits: 3,
     mod: 100,
@@ -78,14 +78,14 @@ const hundreds: WrittenNumbers = {
   },
 };
 
-const writtenNumbersArray: Array<WrittenNumbers> = [
+const writtenNumbersArray: Array<NumbersProperties> = [
   units,
   uniqueDozen,
   commonDozen,
   hundreds,
 ];
 
-const getWrittenNumberOf = (n: number): string => {
+const spellOutNumber = (n: number): string => {
   let spelledOutNumber: string;
   const numberAsString = n.toString();
   const digits = numberAsString.length;
@@ -117,7 +117,7 @@ const getWrittenNumberOf = (n: number): string => {
         const lastDigit = Number(numberAsString.substring(digits - 1, digits));
         const dozen =
           Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
-        const word = getWrittenNumberOf(Number(lastDigit));
+        const word = spellOutNumber(Number(lastDigit));
         spelledOutNumber = `${regularNumbers.writtenNumbers[dozen]}-${word}`;
         break;
       }
@@ -135,13 +135,13 @@ const getWrittenNumberOf = (n: number): string => {
         const nHundred =
           Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
         const hundred = getHundredOf(nHundred);
-        const word = getWrittenNumberOf(Number(lastDigits));
+        const word = spellOutNumber(Number(lastDigits));
         spelledOutNumber = `${hundred} (and) ${word}`;
         break;
       }
     }
     default:
-      break;
+      throw new Error('Invalid number');
   }
 
   return spelledOutNumber;
@@ -158,4 +158,4 @@ const getHundredOf = (n: number): string => {
   return `${unit} ${hundreds.writtenNumbers[0]}`;
 };
 
-export { getWrittenNumberOf };
+export { spellOutNumber };
