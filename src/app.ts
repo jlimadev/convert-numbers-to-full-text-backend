@@ -128,26 +128,34 @@ const getWrittenNumberOf = (n: number): string => {
       );
 
       if (n % regularNumbers.properties.mod === 0) {
-        const firstDigit = Number(numberAsString.charAt(0));
-        const unit = units.writtenNumbers[firstDigit];
-        spelledOutNumber = `${unit} ${regularNumbers.writtenNumbers[0]}`;
+        spelledOutNumber = getHundredOf(n);
         break;
       } else {
-        const lastDigit = Number(numberAsString.substring(digits - 1, digits));
-        const dozen =
+        const lastDigits = Number(numberAsString.substring(digits - 2, digits));
+        const nHundred =
           Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
-        const word = getWrittenNumberOf(Number(lastDigit));
-        spelledOutNumber = `${regularNumbers.writtenNumbers[dozen]}-${word}`;
+        const hundred = getHundredOf(nHundred);
+        const word = getWrittenNumberOf(Number(lastDigits));
+        spelledOutNumber = `${hundred} (and) ${word}`;
         break;
       }
-
-      break;
     }
     default:
       break;
   }
 
   return spelledOutNumber;
+};
+
+const getHundredOf = (n: number): string => {
+  const hundreds = writtenNumbersArray.find(
+    (numbers) => numbers.properties.digits === 3,
+  );
+
+  const numberAsString = n.toString();
+  const firstDigit = Number(numberAsString.charAt(0));
+  const unit = units.writtenNumbers[firstDigit];
+  return `${unit} ${hundreds.writtenNumbers[0]}`;
 };
 
 export { getWrittenNumberOf };

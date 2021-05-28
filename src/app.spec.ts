@@ -115,4 +115,26 @@ describe('Cardinal numbers test suit', () => {
     // Assert
     expect(result).toEqual(expectedResult);
   });
+
+  it('should get correctly the compound hundreds', () => {
+    // Arrange
+    const numbers = [101, 222, 345, 499, 567, 666, 703, 838, 912];
+    const expectedResult = [
+      'one hundred (and) one',
+      'two hundred (and) twenty-two',
+      'three hundred (and) forty-five',
+      'four hundred (and) ninety-nine',
+      'five hundred (and) sixty-seven',
+      'six hundred (and) sixty-six',
+      'seven hundred (and) three',
+      'eight hundred (and) thirty-eight',
+      'nine hundred (and) twelve',
+    ];
+
+    // Act
+    const result = numbers.map((number) => getWrittenNumberOf(number));
+
+    // Assert
+    expect(result).toEqual(expectedResult);
+  });
 });
