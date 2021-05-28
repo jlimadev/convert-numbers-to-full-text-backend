@@ -82,6 +82,7 @@ const writtenNumbersArray: Array<WrittenNumbers> = [
   units,
   uniqueDozen,
   commonDozen,
+  hundreds,
 ];
 
 const getWrittenNumberOf = (n: number): string => {
@@ -122,17 +123,21 @@ const getWrittenNumberOf = (n: number): string => {
       }
     }
     case 3: {
-      if (n % hundreds.properties.mod === 0) {
+      const regularNumbers = foundNumbers.find(
+        (numbers) => numbers.properties.digits === digits,
+      );
+
+      if (n % regularNumbers.properties.mod === 0) {
         const firstDigit = Number(numberAsString.charAt(0));
         const unit = units.writtenNumbers[firstDigit];
-        spelledOutNumber = `${unit} ${hundreds.writtenNumbers[0]}`;
+        spelledOutNumber = `${unit} ${regularNumbers.writtenNumbers[0]}`;
         break;
       } else {
         const lastDigit = Number(numberAsString.substring(digits - 1, digits));
         const dozen =
-          Number(numberAsString.charAt(0)) * hundreds.properties.mod;
+          Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
         const word = getWrittenNumberOf(Number(lastDigit));
-        spelledOutNumber = `${hundreds.writtenNumbers[dozen]}-${word}`;
+        spelledOutNumber = `${regularNumbers.writtenNumbers[dozen]}-${word}`;
         break;
       }
 

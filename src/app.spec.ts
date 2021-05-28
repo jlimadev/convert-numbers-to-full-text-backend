@@ -1,7 +1,7 @@
 import { getWrittenNumberOf } from './app';
 
 describe('Cardinal numbers test suit', () => {
-  it('should get all units from 0 to 9', () => {
+  it('should get all units (1, 2, ..., 9)', () => {
     // Arrange
     const result: Array<string> = [];
     const range = Array.from(Array(10).keys());
@@ -27,7 +27,7 @@ describe('Cardinal numbers test suit', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get all from 10 to 19', () => {
+  it('should get all special numbers (10, 11, ..., 19', () => {
     // Arrange
     const expectedLength = 10;
     const range = Array.from(Array(20).keys()).filter((n) => n >= 10);
@@ -53,7 +53,7 @@ describe('Cardinal numbers test suit', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('should get all dozens (10, 20, 30, ...)', () => {
+  it('should get all round dozens (10, 20, ..., 90)', () => {
     // Arrange
     const hundreds = [10, 20, 30, 40, 50, 60, 70, 80, 90];
     const expectedResult = [
@@ -92,7 +92,7 @@ describe('Cardinal numbers test suit', () => {
     expect(result[1]).toBe('twenty-one');
   });
 
-  it('should get all round hundreds (100, 200, ...)', () => {
+  it('should get all round hundreds (100, 200, ..., 900)', () => {
     // Arrange
     const hundreds = [100, 200, 300, 400, 500, 600, 700, 800, 900];
     const expectedResult = [
