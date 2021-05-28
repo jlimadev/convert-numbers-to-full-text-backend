@@ -53,6 +53,30 @@ describe('Cardinal numbers test suit', () => {
     expect(result).toEqual(expectedResult);
   });
 
+  it('should get all dozens (10, 20, 30, ...)', () => {
+    // Arrange
+    const hundreds = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+    const expectedResult = [
+      'ten',
+      'twenty',
+      'thirty',
+      'forty',
+      'fifty',
+      'sixty',
+      'seventy',
+      'eighty',
+      'ninety',
+    ];
+
+    // Act
+    const result: Array<string> = hundreds.map((number) =>
+      getWrittenNumberOf(number),
+    );
+
+    // Assert
+    expect(result).toEqual(expectedResult);
+  });
+
   it('should get from 20 to 29', () => {
     // Arrange
     const expectedResult = 10;
