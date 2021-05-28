@@ -141,7 +141,7 @@ const spellOutNumber = (n: number): string => {
       }
     }
     default:
-      throw new Error('Invalid number');
+      throw new Error('Number not tracked');
   }
 
   return spelledOutNumber;

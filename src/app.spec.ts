@@ -146,4 +146,12 @@ describe('Cardinal numbers test suit', () => {
     // Assert
     expect(result).toEqual(expectedResult);
   });
+
+  it('should throw an error if pass not tracked numbers', () => {
+    const act = () => {
+      spellOutNumber(999999);
+    };
+
+    expect(act).toThrowError('Number not tracked');
+  });
 });
