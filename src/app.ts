@@ -67,7 +67,7 @@ const commonDozen: WrittenNumbers = {
   },
 };
 
-const hundred: WrittenNumbers = {
+const hundreds: WrittenNumbers = {
   properties: {
     digits: 3,
     mod: 100,
@@ -120,6 +120,23 @@ const getWrittenNumberOf = (n: number): string => {
         spelledOutNumber = `${regularNumbers.writtenNumbers[dozen]}-${word}`;
         break;
       }
+    }
+    case 3: {
+      if (n % hundreds.properties.mod === 0) {
+        const firstDigit = Number(numberAsString.charAt(0));
+        const unit = units.writtenNumbers[firstDigit];
+        spelledOutNumber = `${unit} ${hundreds.writtenNumbers[0]}`;
+        break;
+      } else {
+        const lastDigit = Number(numberAsString.substring(digits - 1, digits));
+        const dozen =
+          Number(numberAsString.charAt(0)) * hundreds.properties.mod;
+        const word = getWrittenNumberOf(Number(lastDigit));
+        spelledOutNumber = `${hundreds.writtenNumbers[dozen]}-${word}`;
+        break;
+      }
+
+      break;
     }
     default:
       break;

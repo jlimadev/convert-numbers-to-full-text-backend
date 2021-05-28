@@ -57,4 +57,35 @@ describe('Cardinal numbers test suit', () => {
     expect(result[0]).toBe('twenty');
     expect(result[1]).toBe('twenty-one');
   });
+
+  it('should get all round hundreds (100, 200, ...)', () => {
+    // Arrange
+    const expectedResult = [
+      'one hundred',
+      'two hundred',
+      'three hundred',
+      'four hundred',
+      'five hundred',
+      'six hundred',
+      'seven hundred',
+      'eight hundred',
+      'nine hundred',
+    ];
+
+    // Act
+    const result: Array<string> = [
+      getWrittenNumberOf(100),
+      getWrittenNumberOf(200),
+      getWrittenNumberOf(300),
+      getWrittenNumberOf(400),
+      getWrittenNumberOf(500),
+      getWrittenNumberOf(600),
+      getWrittenNumberOf(700),
+      getWrittenNumberOf(800),
+      getWrittenNumberOf(900),
+    ];
+
+    // Assert
+    expect(result).toEqual(expectedResult);
+  });
 });
