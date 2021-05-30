@@ -1,129 +1,23 @@
-interface NumbersProperties {
-  properties: {
-    digits: number;
-    mod: number;
-    isSpecial: boolean;
-  };
-  writtenNumbers: {
-    [n: number]: string;
-  };
-}
-
-const units: NumbersProperties = {
-  properties: {
-    digits: 1,
-    mod: 1,
-    isSpecial: false,
-  },
-  writtenNumbers: {
-    0: 'zero',
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-  },
-};
-
-const uniqueDozen: NumbersProperties = {
-  properties: {
-    digits: 2,
-    mod: 10,
-    isSpecial: true,
-  },
-  writtenNumbers: {
-    10: 'ten',
-    11: 'eleven',
-    12: 'twelve',
-    13: 'thirteen',
-    14: 'fourteen',
-    15: 'fifteen',
-    16: 'sixteen',
-    17: 'seventeen',
-    18: 'eighteen',
-    19: 'nineteen',
-  },
-};
-
-const commonDozen: NumbersProperties = {
-  properties: {
-    digits: 2,
-    mod: 10,
-    isSpecial: false,
-  },
-  writtenNumbers: {
-    20: 'twenty',
-    30: 'thirty',
-    40: 'forty',
-    50: 'fifty',
-    60: 'sixty',
-    70: 'seventy',
-    80: 'eighty',
-    90: 'ninety',
-  },
-};
-
-const hundreds: NumbersProperties = {
-  properties: {
-    digits: 3,
-    mod: 100,
-    isSpecial: false,
-  },
-  writtenNumbers: {
-    0: 'hundred',
-  },
-};
-
-const writtenNumbersArray: Array<NumbersProperties> = [
-  units,
-  uniqueDozen,
-  commonDozen,
-  hundreds,
-];
+import { writtenNumbersArray } from './core/domain/numbersAndProperties';
 
 const spellOutNumber = (n: number): string => {
   let spelledOutNumber: string;
   const numberAsString = n.toString();
   const digits = numberAsString.length;
 
-  const foundNumbers = writtenNumbersArray.filter(
+  const numbersWithNDigits = writtenNumbersArray.filter(
     (writtenNumber) => writtenNumber.properties.digits == digits,
   );
 
   switch (digits) {
     case 1:
-      spelledOutNumber = foundNumbers[0].writtenNumbers[n];
+      spelledOutNumber = getUnitOf(n, digits);
       break;
-    case 2: {
-      if (n >= 10 && n < 20) {
-        const specialNumbers = foundNumbers.find(
-          (numbers) => numbers.properties.isSpecial,
-        );
-        spelledOutNumber = specialNumbers.writtenNumbers[n];
-        break;
-      }
-      const regularNumbers = foundNumbers.find(
-        (numbers) => !numbers.properties.isSpecial,
-      );
-
-      if (n % regularNumbers.properties.mod === 0) {
-        spelledOutNumber = regularNumbers.writtenNumbers[n];
-        break;
-      } else {
-        const lastDigit = Number(numberAsString.substring(digits - 1, digits));
-        const dozen =
-          Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
-        const word = spellOutNumber(Number(lastDigit));
-        spelledOutNumber = `${regularNumbers.writtenNumbers[dozen]}-${word}`;
-        break;
-      }
-    }
+    case 2:
+      spelledOutNumber = getDozenOf(n, digits);
+      break;
     case 3: {
-      const regularNumbers = foundNumbers.find(
+      const regularNumbers = numbersWithNDigits.find(
         (numbers) => numbers.properties.digits === digits,
       );
 
@@ -147,6 +41,42 @@ const spellOutNumber = (n: number): string => {
   return spelledOutNumber;
 };
 
+const getNumbersWithNDigits = (digits: number) => {
+  return writtenNumbersArray.filter(
+    (writtenNumber) => writtenNumber.properties.digits == digits,
+  );
+};
+
+const getUnitOf = (n: number, digits: number): string => {
+  const arrayOfUnits = getNumbersWithNDigits(digits);
+  return arrayOfUnits[0].writtenNumbers[n];
+};
+
+const getDozenOf = (n: number, digits: number): string => {
+  const arrayOfDozens = getNumbersWithNDigits(digits);
+  const numberAsString = n.toString();
+
+  if (n >= 10 && n < 20) {
+    const specialNumbers = arrayOfDozens.find(
+      (numbers) => numbers.properties.isSpecial,
+    );
+    return specialNumbers.writtenNumbers[n];
+  }
+  const regularDozens = arrayOfDozens.find(
+    (numbers) => !numbers.properties.isSpecial,
+  );
+
+  if (n % regularDozens.properties.mod === 0) {
+    return regularDozens.writtenNumbers[n];
+  } else {
+    const dozen =
+      Number(numberAsString.charAt(0)) * regularDozens.properties.mod;
+    const unit = Number(numberAsString.substring(digits - 1, digits));
+    const writtenUnit = getUnitOf(unit, 1);
+    return `${regularDozens.writtenNumbers[dozen]}-${writtenUnit}`;
+  }
+};
+
 const getHundredOf = (n: number): string => {
   const hundreds = writtenNumbersArray.find(
     (numbers) => numbers.properties.digits === 3,
@@ -154,7 +84,7 @@ const getHundredOf = (n: number): string => {
 
   const numberAsString = n.toString();
   const firstDigit = Number(numberAsString.charAt(0));
-  const unit = units.writtenNumbers[firstDigit];
+  const unit = getUnitOf(firstDigit, 1);
   return `${unit} ${hundreds.writtenNumbers[0]}`;
 };
 

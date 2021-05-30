@@ -1,6 +1,6 @@
 import { spellOutNumber } from './app';
 
-describe('Cardinal numbers test suit', () => {
+describe('Spell out numbers test suit', () => {
   it('should get all units [1, 2, ..., 9]', () => {
     // Arrange
     const result: Array<string> = [];
