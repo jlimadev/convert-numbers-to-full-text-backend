@@ -1,13 +1,10 @@
 import { writtenNumbersArray } from './core/domain/numbersAndProperties';
+import INumbersProperties from './core/domain/INumbersProperties';
 
 const spellOutNumber = (n: number): string => {
   let spelledOutNumber: string;
   const numberAsString = n.toString();
   const digits = numberAsString.length;
-
-  const numbersWithNDigits = writtenNumbersArray.filter(
-    (writtenNumber) => writtenNumber.properties.digits == digits,
-  );
 
   switch (digits) {
     case 1:
@@ -16,24 +13,9 @@ const spellOutNumber = (n: number): string => {
     case 2:
       spelledOutNumber = getDozenOf(n, digits);
       break;
-    case 3: {
-      const regularNumbers = numbersWithNDigits.find(
-        (numbers) => numbers.properties.digits === digits,
-      );
-
-      if (n % regularNumbers.properties.mod === 0) {
-        spelledOutNumber = getHundredOf(n);
-        break;
-      } else {
-        const lastDigits = Number(numberAsString.substring(digits - 2, digits));
-        const nHundred =
-          Number(numberAsString.charAt(0)) * regularNumbers.properties.mod;
-        const hundred = getHundredOf(nHundred);
-        const word = spellOutNumber(Number(lastDigits));
-        spelledOutNumber = `${hundred} (and) ${word}`;
-        break;
-      }
-    }
+    case 3:
+      spelledOutNumber = getHundredOf(n, digits);
+      break;
     default:
       throw new Error('Number not tracked');
   }
@@ -41,7 +23,7 @@ const spellOutNumber = (n: number): string => {
   return spelledOutNumber;
 };
 
-const getNumbersWithNDigits = (digits: number) => {
+const getNumbersWithNDigits = (digits: number): INumbersProperties[] => {
   return writtenNumbersArray.filter(
     (writtenNumber) => writtenNumber.properties.digits == digits,
   );
@@ -77,11 +59,25 @@ const getDozenOf = (n: number, digits: number): string => {
   }
 };
 
-const getHundredOf = (n: number): string => {
-  const hundreds = writtenNumbersArray.find(
-    (numbers) => numbers.properties.digits === 3,
+const getHundredOf = (n: number, digits: number): string => {
+  const numberAsString = n.toString();
+  const hundredArray = getNumbersWithNDigits(digits);
+  const hundreds = hundredArray.find(
+    (numbers) => numbers.properties.digits === digits,
   );
 
+  if (n % hundreds.properties.mod === 0) {
+    return getRoundHundredOf(n, hundreds);
+  } else {
+    const nHundred = Number(numberAsString.charAt(0)) * hundreds.properties.mod;
+    const spelledHundred = getRoundHundredOf(nHundred, hundreds);
+    const lastDigits = Number(numberAsString.substring(digits - 2, digits));
+    const spelledLastDigits = spellOutNumber(Number(lastDigits));
+    return `${spelledHundred} (and) ${spelledLastDigits}`;
+  }
+};
+
+const getRoundHundredOf = (n: number, hundreds: INumbersProperties) => {
   const numberAsString = n.toString();
   const firstDigit = Number(numberAsString.charAt(0));
   const unit = getUnitOf(firstDigit, 1);
