@@ -13,6 +13,11 @@ spelledNumber = spellOutNumber(412) // four handred (and) twelve
 spelledNumber = spellOutNumber(445) // four handred (and) forty-five
 ```
 
+## Install the dependencies
+```bash
+yarn
+```
+
 ## Testing
 
 ```bash
