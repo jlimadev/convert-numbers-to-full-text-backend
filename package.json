@@ -7,7 +7,9 @@
   "scripts": {
     "build": "npx tsc --watch",
     "start": "lite-server",
-    "test": "jest"
+    "test": "jest --coverage",
+    "lint": "eslint --config=.eslintrc.json src/**/*.ts",
+    "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
@@ -19,6 +21,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.1",
+    "lint-staged": "^11.0.0",
     "lite-server": "^2.6.1",
     "prettier": "^2.3.0",
     "ts-jest": "^27.0.1"
