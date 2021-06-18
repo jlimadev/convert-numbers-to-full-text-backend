@@ -1,3 +1,3 @@
-export interface UseCase {
+export interface SpellNumber {
   invokeWith: (n: number) => string;
 }
