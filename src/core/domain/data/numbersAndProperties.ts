@@ -69,11 +69,11 @@ const hundreds: NumbersProperties = {
   },
 };
 
-const writtenNumbersArray: Array<NumbersProperties> = [
+const writtenNumbersData: Array<NumbersProperties> = [
   units,
   uniqueDozen,
   commonDozen,
   hundreds,
 ];
 
-export { writtenNumbersArray };
+export { writtenNumbersData };
