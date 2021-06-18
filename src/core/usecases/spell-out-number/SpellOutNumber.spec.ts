@@ -1,170 +1,71 @@
 import { SpellOutNumber } from './SpellOutNumber';
+import { NumberFactory } from '../number-factory/NumberFactory';
 
 const makeSut = () => {
-  const sut = new SpellOutNumber();
+  const writtenNumberFactory: NumberFactory = {
+    getUnitOf: jest.fn(),
+    getDozenOf: jest.fn(),
+    getHundredOf: jest.fn(),
+  };
 
-  return { sut };
+  const sut = new SpellOutNumber(writtenNumberFactory);
+
+  return { sut, writtenNumberFactory };
 };
 
 describe('Spell out numbers test suit', () => {
-  it('should get all units [1, 2, ..., 9]', () => {
+  it('should invoke correctly when calling with unit number (1 to 9)', () => {
     // Arrange
-    const { sut } = makeSut();
-    const result: Array<string> = [];
-    const range = Array.from(Array(10).keys());
-    const expectedLength = 10;
-    const expectedResult = [
-      'zero',
-      'one',
-      'two',
-      'three',
-      'four',
-      'five',
-      'six',
-      'seven',
-      'eight',
-      'nine',
-    ];
+    const { sut, writtenNumberFactory } = makeSut();
+    const n = 9;
 
     // Act
-    range.forEach((i) => result.push(sut.invokeWith(i)));
+    sut.invokeWith(n);
 
     // Assert
-    expect(result.length).toBe(expectedLength);
-    expect(result).toEqual(expectedResult);
+    expect(writtenNumberFactory.getUnitOf).toHaveBeenCalledWith(n);
+    expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
   });
 
-  it('should get all special numbers [10, 11, ..., 19]', () => {
+  it('should invoke correctly when calling with dozen number (10 to 99)', () => {
     // Arrange
-    const { sut } = makeSut();
-    const expectedLength = 10;
-    const range = Array.from(Array(20).keys()).filter((n) => n >= 10);
-    const expectedResult = [
-      'ten',
-      'eleven',
-      'twelve',
-      'thirteen',
-      'fourteen',
-      'fifteen',
-      'sixteen',
-      'seventeen',
-      'eighteen',
-      'nineteen',
-    ];
+    const { sut, writtenNumberFactory } = makeSut();
+    const n = 98;
 
     // Act
-    const result: Array<string> = [];
-    range.forEach((i) => result.push(sut.invokeWith(i)));
+    sut.invokeWith(n);
 
     // Assert
-    expect(result.length).toBe(expectedLength);
-    expect(result).toEqual(expectedResult);
+    expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getDozenOf).toHaveBeenCalledWith(n);
+    expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
   });
 
-  it('should get all round dozens [10, 20, ..., 90]', () => {
+  it('should invoke correctly when calling with hundred number (100 to 999)', () => {
     // Arrange
-    const { sut } = makeSut();
-    const hundreds = [10, 20, 30, 40, 50, 60, 70, 80, 90];
-    const expectedResult = [
-      'ten',
-      'twenty',
-      'thirty',
-      'forty',
-      'fifty',
-      'sixty',
-      'seventy',
-      'eighty',
-      'ninety',
-    ];
+    const { sut, writtenNumberFactory } = makeSut();
+    const n = 654;
 
     // Act
-    const result: Array<string> = hundreds.map((number) =>
-      sut.invokeWith(number),
-    );
+    sut.invokeWith(n);
 
     // Assert
-    expect(result).toEqual(expectedResult);
-  });
-
-  it('should get correctly specified dozens [20, 21, ..., 29]', () => {
-    // Arrange
-    const { sut } = makeSut();
-    const range = Array.from(Array(30).keys()).filter((n) => n >= 20);
-    const expectedResult = [
-      'twenty',
-      'twenty-one',
-      'twenty-two',
-      'twenty-three',
-      'twenty-four',
-      'twenty-five',
-      'twenty-six',
-      'twenty-seven',
-      'twenty-eight',
-      'twenty-nine',
-    ];
-
-    // Act
-    const result: Array<string> = [];
-    range.forEach((i) => result.push(sut.invokeWith(i)));
-
-    // Assert
-    expect(result).toEqual(expectedResult);
-  });
-
-  it('should get all round hundreds [100, 200, ..., 900]', () => {
-    // Arrange
-    const { sut } = makeSut();
-    const hundreds = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-    const expectedResult = [
-      'one hundred',
-      'two hundred',
-      'three hundred',
-      'four hundred',
-      'five hundred',
-      'six hundred',
-      'seven hundred',
-      'eight hundred',
-      'nine hundred',
-    ];
-
-    // Act
-    const result: Array<string> = hundreds.map((number) =>
-      sut.invokeWith(number),
-    );
-
-    // Assert
-    expect(result).toEqual(expectedResult);
-  });
-
-  it('should get correctly the specified compound hundreds [101, 222, ..., 912]', () => {
-    // Arrange
-    const { sut } = makeSut();
-    const numbers = [101, 222, 345, 499, 567, 666, 703, 838, 912];
-    const expectedResult = [
-      'one hundred (and) one',
-      'two hundred (and) twenty-two',
-      'three hundred (and) forty-five',
-      'four hundred (and) ninety-nine',
-      'five hundred (and) sixty-seven',
-      'six hundred (and) sixty-six',
-      'seven hundred (and) three',
-      'eight hundred (and) thirty-eight',
-      'nine hundred (and) twelve',
-    ];
-
-    // Act
-    const result = numbers.map((number) => sut.invokeWith(number));
-
-    // Assert
-    expect(result).toEqual(expectedResult);
+    expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getHundredOf).toHaveBeenCalledWith(n);
   });
 
   it('should throw an error if pass not tracked numbers', () => {
-    const { sut } = makeSut();
+    const { sut, writtenNumberFactory } = makeSut();
+
     const act = () => {
       sut.invokeWith(999999);
     };
 
     expect(act).toThrowError('Number not tracked');
+    expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
   });
 });
