@@ -1,5 +1,5 @@
 import { UseCase } from './UseCase';
-import { getDozenOf, getHundredOf, getUnitOf } from './getSpelledNumbers';
+import { getDozenOf, getHundredOf, getUnitOf } from '../getSpelledNumbers';
 
 export class SpellOutNumber implements UseCase {
   invokeWith(n: number): string {
