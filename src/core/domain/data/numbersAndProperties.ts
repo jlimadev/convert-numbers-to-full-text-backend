@@ -1,10 +1,10 @@
-import INumbersProperties from './INumbersProperties';
+import NumbersProperties from './NumbersProperties';
 
-const units: INumbersProperties = {
+const units: NumbersProperties = {
   properties: {
     digits: 1,
     mod: 1,
-    isSpecial: false,
+    hasSpecialSpelling: false,
   },
   writtenNumbers: {
     0: 'zero',
@@ -20,11 +20,11 @@ const units: INumbersProperties = {
   },
 };
 
-const uniqueDozen: INumbersProperties = {
+const uniqueDozen: NumbersProperties = {
   properties: {
     digits: 2,
     mod: 10,
-    isSpecial: true,
+    hasSpecialSpelling: true,
   },
   writtenNumbers: {
     10: 'ten',
@@ -40,11 +40,11 @@ const uniqueDozen: INumbersProperties = {
   },
 };
 
-const commonDozen: INumbersProperties = {
+const commonDozen: NumbersProperties = {
   properties: {
     digits: 2,
     mod: 10,
-    isSpecial: false,
+    hasSpecialSpelling: false,
   },
   writtenNumbers: {
     20: 'twenty',
@@ -58,18 +58,18 @@ const commonDozen: INumbersProperties = {
   },
 };
 
-const hundreds: INumbersProperties = {
+const hundreds: NumbersProperties = {
   properties: {
     digits: 3,
     mod: 100,
-    isSpecial: false,
+    hasSpecialSpelling: false,
   },
   writtenNumbers: {
     0: 'hundred',
   },
 };
 
-const writtenNumbersArray: Array<INumbersProperties> = [
+const writtenNumbersArray: Array<NumbersProperties> = [
   units,
   uniqueDozen,
   commonDozen,
