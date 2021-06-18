@@ -7,7 +7,7 @@ export class SpellOutNumber implements SpellNumber {
   private readonly lastSpecialNumber: number = 20;
 
   invokeWith(n: number): string {
-    const digits = this.getCurrentNumberDigits(n);
+    const digits = SpellOutNumber.getCurrentNumberDigits(n);
     switch (digits) {
       case 1:
         return this.getUnitOf(n);
@@ -20,7 +20,7 @@ export class SpellOutNumber implements SpellNumber {
     }
   }
 
-  private getCurrentNumberDigits(n: number): number {
+  private static getCurrentNumberDigits(n: number): number {
     return n.toString().length;
   }
 
@@ -37,13 +37,13 @@ export class SpellOutNumber implements SpellNumber {
   };
 
   private getUnitOf(n: number): string {
-    const digits = this.getCurrentNumberDigits(n);
+    const digits = SpellOutNumber.getCurrentNumberDigits(n);
     const arrayOfUnits = this.getDataOf(n, digits);
     return arrayOfUnits.writtenNumbers[n];
   }
 
   private getDozenOf(n: number): string {
-    const digits = this.getCurrentNumberDigits(n);
+    const digits = SpellOutNumber.getCurrentNumberDigits(n);
     const arrayOfDozens = this.getDataOf(n, digits);
     const numberAsString = n.toString();
 
@@ -63,7 +63,7 @@ export class SpellOutNumber implements SpellNumber {
   }
 
   private getHundredOf(n: number): string {
-    const digits = this.getCurrentNumberDigits(n);
+    const digits = SpellOutNumber.getCurrentNumberDigits(n);
     const hundreds = this.getDataOf(n, digits);
     const numberAsString = n.toString();
 
