@@ -1,8 +1,15 @@
-import { spellOutNumber } from './app';
+import { SpellOutNumber } from './SpellOutNumber';
+
+const makeSut = () => {
+  const sut = new SpellOutNumber();
+
+  return { sut };
+};
 
 describe('Spell out numbers test suit', () => {
   it('should get all units [1, 2, ..., 9]', () => {
     // Arrange
+    const { sut } = makeSut();
     const result: Array<string> = [];
     const range = Array.from(Array(10).keys());
     const expectedLength = 10;
@@ -20,7 +27,7 @@ describe('Spell out numbers test suit', () => {
     ];
 
     // Act
-    range.forEach((i) => result.push(spellOutNumber(i)));
+    range.forEach((i) => result.push(sut.invokeWith(i)));
 
     // Assert
     expect(result.length).toBe(expectedLength);
@@ -29,6 +36,7 @@ describe('Spell out numbers test suit', () => {
 
   it('should get all special numbers [10, 11, ..., 19]', () => {
     // Arrange
+    const { sut } = makeSut();
     const expectedLength = 10;
     const range = Array.from(Array(20).keys()).filter((n) => n >= 10);
     const expectedResult = [
@@ -46,7 +54,7 @@ describe('Spell out numbers test suit', () => {
 
     // Act
     const result: Array<string> = [];
-    range.forEach((i) => result.push(spellOutNumber(i)));
+    range.forEach((i) => result.push(sut.invokeWith(i)));
 
     // Assert
     expect(result.length).toBe(expectedLength);
@@ -55,6 +63,7 @@ describe('Spell out numbers test suit', () => {
 
   it('should get all round dozens [10, 20, ..., 90]', () => {
     // Arrange
+    const { sut } = makeSut();
     const hundreds = [10, 20, 30, 40, 50, 60, 70, 80, 90];
     const expectedResult = [
       'ten',
@@ -70,7 +79,7 @@ describe('Spell out numbers test suit', () => {
 
     // Act
     const result: Array<string> = hundreds.map((number) =>
-      spellOutNumber(number),
+      sut.invokeWith(number),
     );
 
     // Assert
@@ -79,6 +88,7 @@ describe('Spell out numbers test suit', () => {
 
   it('should get correctly specified dozens [20, 21, ..., 29]', () => {
     // Arrange
+    const { sut } = makeSut();
     const range = Array.from(Array(30).keys()).filter((n) => n >= 20);
     const expectedResult = [
       'twenty',
@@ -95,7 +105,7 @@ describe('Spell out numbers test suit', () => {
 
     // Act
     const result: Array<string> = [];
-    range.forEach((i) => result.push(spellOutNumber(i)));
+    range.forEach((i) => result.push(sut.invokeWith(i)));
 
     // Assert
     expect(result).toEqual(expectedResult);
@@ -103,6 +113,7 @@ describe('Spell out numbers test suit', () => {
 
   it('should get all round hundreds [100, 200, ..., 900]', () => {
     // Arrange
+    const { sut } = makeSut();
     const hundreds = [100, 200, 300, 400, 500, 600, 700, 800, 900];
     const expectedResult = [
       'one hundred',
@@ -118,7 +129,7 @@ describe('Spell out numbers test suit', () => {
 
     // Act
     const result: Array<string> = hundreds.map((number) =>
-      spellOutNumber(number),
+      sut.invokeWith(number),
     );
 
     // Assert
@@ -127,6 +138,7 @@ describe('Spell out numbers test suit', () => {
 
   it('should get correctly the specified compound hundreds [101, 222, ..., 912]', () => {
     // Arrange
+    const { sut } = makeSut();
     const numbers = [101, 222, 345, 499, 567, 666, 703, 838, 912];
     const expectedResult = [
       'one hundred (and) one',
@@ -141,15 +153,16 @@ describe('Spell out numbers test suit', () => {
     ];
 
     // Act
-    const result = numbers.map((number) => spellOutNumber(number));
+    const result = numbers.map((number) => sut.invokeWith(number));
 
     // Assert
     expect(result).toEqual(expectedResult);
   });
 
   it('should throw an error if pass not tracked numbers', () => {
+    const { sut } = makeSut();
     const act = () => {
-      spellOutNumber(999999);
+      sut.invokeWith(999999);
     };
 
     expect(act).toThrowError('Number not tracked');
