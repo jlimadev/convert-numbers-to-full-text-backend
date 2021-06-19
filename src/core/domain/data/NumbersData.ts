@@ -69,11 +69,23 @@ const hundreds: NumbersProperties = {
   },
 };
 
+const thousands: NumbersProperties = {
+  properties: {
+    digits: 4,
+    mod: 1000,
+    hasSpecialSpelling: false,
+  },
+  writtenNumbers: {
+    0: 'thousand',
+  },
+};
+
 const writtenNumbersData: Array<NumbersProperties> = [
   units,
   uniqueDozen,
   commonDozen,
   hundreds,
+  thousands,
 ];
 
 export { writtenNumbersData };
