@@ -49,11 +49,7 @@ export class WrittenNumberFactory implements NumberFactory {
     const { hasSpecialSpelling, rounded, rest } = this.getPropertiesOfNumber(n);
     const dozensData = this.getDataOf(n);
 
-    if (hasSpecialSpelling) {
-      return dozensData.writtenNumbers[n];
-    }
-
-    if (n % dozensData.properties.mod === 0) {
+    if (hasSpecialSpelling || n % dozensData.properties.mod === 0) {
       return dozensData.writtenNumbers[n];
     } else {
       const writtenDozen = dozensData.writtenNumbers[rounded.dozen];
