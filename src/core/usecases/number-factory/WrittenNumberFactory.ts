@@ -2,10 +2,9 @@ import { NumberFactory } from './NumberFactory';
 import NumbersProperties from '../../domain/data/NumbersProperties';
 
 export interface NumberProperties {
-  digits: number;
-  firstDigit: number;
-  restDigits: number;
+  digitsCount: number;
   hasSpecialSpelling: boolean;
+  rest: number;
   rounded: {
     unit: number;
     dozen: number;
@@ -16,14 +15,13 @@ export interface NumberProperties {
 export class WrittenNumberFactory implements NumberFactory {
   constructor(private readonly numbersData: Array<NumbersProperties>) {}
 
-  private getPropertiesOf(n: number): NumberProperties {
+  private getPropertiesOfNumber = (n: number): NumberProperties => {
     const stringOfNumber = n.toString();
-    const digits = stringOfNumber.length;
+    const digitsCount = stringOfNumber.length;
     const firstDigit = Number(stringOfNumber.charAt(0));
     return {
-      digits: digits,
-      firstDigit: firstDigit,
-      restDigits: Number(stringOfNumber.substring(1, digits)),
+      digitsCount: digitsCount,
+      rest: Number(stringOfNumber.substring(1, digitsCount)),
       hasSpecialSpelling: n >= 10 && n < 20,
       rounded: {
         unit: firstDigit,
@@ -31,13 +29,13 @@ export class WrittenNumberFactory implements NumberFactory {
         hundred: firstDigit * 100,
       },
     };
-  }
+  };
 
   private getDataOf = (n: number): NumbersProperties => {
-    const { digits, hasSpecialSpelling } = this.getPropertiesOf(n);
+    const { digitsCount, hasSpecialSpelling } = this.getPropertiesOfNumber(n);
     return this.numbersData.find(
       (entry) =>
-        entry.properties.digits == digits &&
+        entry.properties.digits == digitsCount &&
         entry.properties.hasSpecialSpelling === hasSpecialSpelling,
     );
   };
@@ -48,7 +46,7 @@ export class WrittenNumberFactory implements NumberFactory {
   }
 
   getDozenOf(n: number): string {
-    const { hasSpecialSpelling, rounded, restDigits } = this.getPropertiesOf(n);
+    const { hasSpecialSpelling, rounded, rest } = this.getPropertiesOfNumber(n);
     const dozensData = this.getDataOf(n);
 
     if (hasSpecialSpelling) {
@@ -59,13 +57,13 @@ export class WrittenNumberFactory implements NumberFactory {
       return dozensData.writtenNumbers[n];
     } else {
       const writtenDozen = dozensData.writtenNumbers[rounded.dozen];
-      const writtenUnit = this.getUnitOf(restDigits);
+      const writtenUnit = this.getUnitOf(rest);
       return `${writtenDozen}-${writtenUnit}`;
     }
   }
 
   getHundredOf(n: number): string {
-    const { restDigits, rounded } = this.getPropertiesOf(n);
+    const { rounded, rest } = this.getPropertiesOfNumber(n);
     const hundredsData = this.getDataOf(n);
     const spelledUnit = this.getUnitOf(rounded.unit);
     const spelledHundred = `${spelledUnit} ${hundredsData.writtenNumbers[0]}`;
@@ -73,7 +71,7 @@ export class WrittenNumberFactory implements NumberFactory {
     if (n % hundredsData.properties.mod === 0) {
       return spelledHundred;
     } else {
-      const spelledLastDigits = this.getDozenOf(restDigits);
+      const spelledLastDigits = this.getDozenOf(rest);
       return `${spelledHundred} (and) ${spelledLastDigits}`;
     }
   }
