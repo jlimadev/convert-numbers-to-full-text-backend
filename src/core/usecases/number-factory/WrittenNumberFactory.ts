@@ -9,6 +9,7 @@ export interface NumberProperties {
     unit: number;
     dozen: number;
     hundred: number;
+    thousand: number;
   };
 }
 
@@ -27,6 +28,7 @@ export class WrittenNumberFactory implements NumberFactory {
         unit: firstDigit,
         dozen: firstDigit * 10,
         hundred: firstDigit * 100,
+        thousand: firstDigit * 1000,
       },
     };
   };
@@ -70,5 +72,13 @@ export class WrittenNumberFactory implements NumberFactory {
       const spelledLastDigits = this.getDozenOf(rest);
       return `${spelledHundred} (and) ${spelledLastDigits}`;
     }
+  }
+
+  getThousandOf(n: number): string {
+    const { rounded } = this.getPropertiesOfNumber(n);
+    const thousandData = this.getDataOf(n);
+    const spelledUnit = this.getUnitOf(rounded.unit);
+    const spelledThousand = `${spelledUnit} ${thousandData.writtenNumbers[0]}`;
+    return spelledThousand;
   }
 }

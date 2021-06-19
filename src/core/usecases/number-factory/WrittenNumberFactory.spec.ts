@@ -165,4 +165,31 @@ describe('WrittenNumberFactory test suit', () => {
       expect(result).toEqual(expectedResult);
     });
   });
+
+  describe('thousands', () => {
+    it('should get correctly specified rounded thousands [1000, 2000, ..., 9000]', () => {
+      // Arrange
+      const { sut } = makeSut();
+      const expectedResult = [
+        'one thousand',
+        'two thousand',
+        'three thousand',
+        'four thousand',
+        'five thousand',
+        'six thousand',
+        'seven thousand',
+        'eight thousand',
+        'nine thousand',
+      ];
+
+      // 1000 to 9000
+      const thousands = Array.from(Array(9).keys(), (i) => (i + 1) * 1000);
+
+      // Act
+      const result = thousands.map((number) => sut.getThousandOf(number));
+
+      // Assert
+      expect(result).toEqual(expectedResult);
+    });
+  });
 });
