@@ -1,21 +1,26 @@
 # Spell Out Numbers
-This is a Typescript Project to write down/spell it when you input.
+This is a Typescript Project to write down/spell numbers given an input.
 
 A few examples of usage
 
 ```typescript
-import { spellOutNumber } from "./app";
+const numbersFactory = new WrittenNumberFactory(writtenNumbersData);
+const writeNumbers = new SpellOutNumber(numbersFactory);
 
-let spelledNumber: String;
-spelledNumber = spellOutNumber(100) // one hundred
-spelledNumber = spellOutNumber(12) // twelve
-spelledNumber = spellOutNumber(412) // four handred (and) twelve
-spelledNumber = spellOutNumber(445) // four handred (and) forty-five
+const numbers = Array.from(Array(999).keys());
+const writtenNumbers = numbers.map((number) =>
+  writeNumbers.invokeWith(number),
+);
 ```
 
 ## Install the dependencies
 ```bash
 yarn
+```
+
+## Start the app
+```bash
+yarn start
 ```
 
 ## Testing
