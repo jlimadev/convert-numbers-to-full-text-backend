@@ -24,7 +24,7 @@ module.exports = {
   ],
 
   collectCoverage: true,
-  collectCoverageFrom: ['**/*.ts', '!**/jest.config.js', '!**/debug.js', '!**/run.ts'],
+  collectCoverageFrom: ['**/*.ts', '!**/jest.config.js', '!**/app.ts'],
   coverageDirectory: './coverage',
   coverageReporters: ['lcov', 'text'],
   coverageThreshold: {
