@@ -6,6 +6,7 @@ const makeSut = () => {
     getUnitOf: jest.fn(),
     getDozenOf: jest.fn(),
     getHundredOf: jest.fn(),
+    getThousandOf: jest.fn(),
   };
 
   const sut = new SpellOutNumber(writtenNumberFactory);
@@ -26,6 +27,7 @@ describe('Spell out numbers test suit', () => {
     expect(writtenNumberFactory.getUnitOf).toHaveBeenCalledWith(n);
     expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
     expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getThousandOf).not.toHaveBeenCalled();
   });
 
   it('should invoke correctly when calling with dozen number (10 to 99)', () => {
@@ -40,6 +42,7 @@ describe('Spell out numbers test suit', () => {
     expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
     expect(writtenNumberFactory.getDozenOf).toHaveBeenCalledWith(n);
     expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getThousandOf).not.toHaveBeenCalled();
   });
 
   it('should invoke correctly when calling with hundred number (100 to 999)', () => {
@@ -54,6 +57,22 @@ describe('Spell out numbers test suit', () => {
     expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
     expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
     expect(writtenNumberFactory.getHundredOf).toHaveBeenCalledWith(n);
+    expect(writtenNumberFactory.getThousandOf).not.toHaveBeenCalled();
+  });
+
+  it('should invoke correctly when calling with hundred number (1000 to 9999)', () => {
+    // Arrange
+    const { sut, writtenNumberFactory } = makeSut();
+    const n = 6594;
+
+    // Act
+    sut.invokeWith(n);
+
+    // Assert
+    expect(writtenNumberFactory.getUnitOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getDozenOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getHundredOf).not.toHaveBeenCalled();
+    expect(writtenNumberFactory.getThousandOf).toHaveBeenCalledWith(n);
   });
 
   it('should throw an error if pass not tracked numbers', () => {

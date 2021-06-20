@@ -13,6 +13,8 @@ export class SpellOutNumber implements SpellNumber {
         return this.numberFactory.getDozenOf(n);
       case 3:
         return this.numberFactory.getHundredOf(n);
+      case 4:
+        return this.numberFactory.getThousandOf(n);
       default:
         throw new Error('Number not tracked');
     }
