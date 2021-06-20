@@ -170,6 +170,10 @@ describe('WrittenNumberFactory test suit', () => {
     it('should get correctly specified rounded thousands [1000, 2000, ..., 9000]', () => {
       // Arrange
       const { sut } = makeSut();
+
+      // [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000]
+      const thousands = Array.from(Array(9).keys(), (i) => (i + 1) * 1000);
+
       const expectedResult = [
         'one thousand',
         'two thousand',
@@ -182,8 +186,33 @@ describe('WrittenNumberFactory test suit', () => {
         'nine thousand',
       ];
 
-      // 1000 to 9000
-      const thousands = Array.from(Array(9).keys(), (i) => (i + 1) * 1000);
+      // Act
+      const result = thousands.map((number) => sut.getThousandOf(number));
+
+      // Assert
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should get correctly specified thousands [1030, 2131, ..., 9838]', () => {
+      // Arrange
+      const { sut } = makeSut();
+      // [1030, 2131, 3232, 4333, 5434, 6535, 7636, 8737, 9838]
+      const thousands = Array.from(
+        Array(9).keys(),
+        (i) => (i + 1) * 1000 + (i * 100 + 30 + i),
+      );
+
+      const expectedResult = [
+        'one thousand (and) thirty',
+        'two thousand one hundred (and) thirty-one',
+        'three thousand two hundred (and) thirty-two',
+        'four thousand three hundred (and) thirty-three',
+        'five thousand four hundred (and) thirty-four',
+        'six thousand five hundred (and) thirty-five',
+        'seven thousand six hundred (and) thirty-six',
+        'eight thousand seven hundred (and) thirty-seven',
+        'nine thousand eight hundred (and) thirty-eight',
+      ];
 
       // Act
       const result = thousands.map((number) => sut.getThousandOf(number));
