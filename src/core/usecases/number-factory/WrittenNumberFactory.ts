@@ -76,9 +76,9 @@ export class WrittenNumberFactory implements NumberFactory {
     if (hasSpecialSpelling || n % dozensData.properties.mod === 0) {
       return dozensData.writtenNumbers[n];
     } else {
-      const writtenDozen = dozensData.writtenNumbers[rounded.dozen];
-      const writtenUnit = this.getUnitOf(rest.value);
-      return `${writtenDozen}-${writtenUnit}`;
+      const spelledDozen = dozensData.writtenNumbers[rounded.dozen];
+      const spelledRest = this.getSpelledRest(rest, false);
+      return `${spelledDozen}-${spelledRest}`;
     }
   }
 
@@ -91,8 +91,8 @@ export class WrittenNumberFactory implements NumberFactory {
     if (n % hundredsData.properties.mod === 0) {
       return spelledHundred;
     } else {
-      const spelledLastDigits = this.getDozenOf(rest.value);
-      return `${spelledHundred} (and) ${spelledLastDigits}`;
+      const spelledRest = this.getSpelledRest(rest, true);
+      return `${spelledHundred} ${spelledRest}`;
     }
   }
 
