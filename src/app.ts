@@ -1,6 +1,6 @@
 import { writtenNumbersData } from './core/domain/model/numbers';
-import { WrittenNumberFactory } from './core/usecases/number-factory/WrittenNumberFactory';
-import { SpellOutNumber } from './core/usecases/spell-out-number/SpellOutNumber';
+import { WrittenNumberFactory } from './core/data/number-factory/WrittenNumberFactory';
+import { SpellOutNumber } from './core/data/spell-out-number/SpellOutNumber';
 
 (() => {
   const numbersFactory = new WrittenNumberFactory(writtenNumbersData);
