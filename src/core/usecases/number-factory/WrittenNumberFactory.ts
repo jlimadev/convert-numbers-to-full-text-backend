@@ -1,5 +1,5 @@
 import { NumberFactory } from './NumberFactory';
-import { NumbersProperties } from '../../domain/numbers';
+import { NumbersProperties } from '../../domain/model/numbers';
 
 export type RestProperties = {
   value: number;
@@ -72,7 +72,6 @@ export class WrittenNumberFactory implements NumberFactory {
   getDozenOf(n: number): string {
     const { hasSpecialSpelling, rounded, rest } = this.getPropertiesOfNumber(n);
     const dozensData = this.getDataOf(n);
-
     if (hasSpecialSpelling || n % dozensData.mod === 0) {
       return dozensData.data[n];
     } else {

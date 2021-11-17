@@ -1,5 +1,5 @@
 import { WrittenNumberFactory } from './WrittenNumberFactory';
-import { writtenNumbersData } from '../../domain/numbers';
+import { writtenNumbersData } from '../../domain/model/numbers';
 
 const makeSut = () => {
   const sut = new WrittenNumberFactory(writtenNumbersData);
