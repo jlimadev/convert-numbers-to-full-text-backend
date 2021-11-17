@@ -86,8 +86,7 @@ export class WrittenNumberFactory implements NumberFactory {
     const { rounded, rest } = this.getPropertiesOfNumber(n);
     const hundredsData = this.getDataOf(n);
     const spelledUnit = this.getUnitOf(rounded.unit);
-    const spelledHundred = `${spelledUnit} ${hundredsData.data[0]}`;
-
+    const spelledHundred = `${spelledUnit} ${hundredsData.data}`;
     if (n % hundredsData.mod === 0) {
       return spelledHundred;
     } else {
@@ -100,8 +99,7 @@ export class WrittenNumberFactory implements NumberFactory {
     const { rounded, rest } = this.getPropertiesOfNumber(n);
     const thousandData = this.getDataOf(n);
     const spelledUnit = this.getUnitOf(rounded.unit);
-    const spelledThousand = `${spelledUnit} ${thousandData.data[0]}`;
-
+    const spelledThousand = `${spelledUnit} ${thousandData.data}`;
     if (n % thousandData.mod === 0) {
       return spelledThousand;
     } else {

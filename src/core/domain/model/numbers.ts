@@ -1,10 +1,10 @@
+type Data = string | { [n: number]: string };
+
 export type NumbersProperties = {
   digits: number;
   mod: number;
   hasSpecialSpelling: boolean;
-  data: {
-    [n: number]: string;
-  };
+  data: Data;
 };
 
 const units: NumbersProperties = {
@@ -63,18 +63,14 @@ const hundreds: NumbersProperties = {
   digits: 3,
   mod: 100,
   hasSpecialSpelling: false,
-  data: {
-    0: 'hundred',
-  },
+  data: 'hundred',
 };
 
 const thousands: NumbersProperties = {
   digits: 4,
   mod: 1000,
   hasSpecialSpelling: false,
-  data: {
-    0: 'thousand',
-  },
+  data: 'thousand',
 };
 
 const writtenNumbersData: Array<NumbersProperties> = [
