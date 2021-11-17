@@ -1,4 +1,13 @@
-import NumbersProperties from './NumbersProperties';
+export type NumbersProperties = {
+  properties: {
+    digits: number;
+    mod: number;
+    hasSpecialSpelling: boolean;
+  };
+  writtenNumbers: {
+    [n: number]: string;
+  };
+};
 
 const units: NumbersProperties = {
   properties: {

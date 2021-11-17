@@ -1,10 +1,10 @@
 import { NumberFactory } from './NumberFactory';
-import NumbersProperties from '../../domain/data/NumbersProperties';
+import { NumbersProperties } from '../../domain/data/NumbersData';
 
-export interface RestProperties {
+export type RestProperties = {
   value: number;
   length: number;
-}
+};
 
 export interface NumberProperties {
   length: number;
