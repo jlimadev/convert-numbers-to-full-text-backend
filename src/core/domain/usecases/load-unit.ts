@@ -1,3 +1,3 @@
 export interface LoadUnit {
-  loadUnit(entry: number): string;
+  loadUnit(): string;
 }
