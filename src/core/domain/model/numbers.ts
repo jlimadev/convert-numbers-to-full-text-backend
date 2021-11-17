@@ -7,7 +7,7 @@ export type NumbersProperties = {
   data: Data;
 };
 
-const units: NumbersProperties = {
+export const units: NumbersProperties = {
   digits: 1,
   mod: 1,
   hasSpecialSpelling: false,
