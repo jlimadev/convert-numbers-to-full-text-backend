@@ -1,5 +1,5 @@
 import { NumberFactory } from './NumberFactory';
-import { NumbersProperties } from '../../domain/data/NumbersData';
+import { NumbersProperties } from '../../domain/numbers';
 
 export type RestProperties = {
   value: number;
@@ -46,8 +46,8 @@ export class WrittenNumberFactory implements NumberFactory {
     const { length, hasSpecialSpelling } = this.getPropertiesOfNumber(n);
     return this.numbersData.find(
       (entry) =>
-        entry.properties.digits == length &&
-        entry.properties.hasSpecialSpelling === hasSpecialSpelling,
+        entry.digits == length &&
+        entry.hasSpecialSpelling === hasSpecialSpelling,
     );
   };
 
@@ -66,17 +66,17 @@ export class WrittenNumberFactory implements NumberFactory {
 
   getUnitOf(n: number): string {
     const unitsData = this.getDataOf(n);
-    return unitsData.writtenNumbers[n];
+    return unitsData.data[n];
   }
 
   getDozenOf(n: number): string {
     const { hasSpecialSpelling, rounded, rest } = this.getPropertiesOfNumber(n);
     const dozensData = this.getDataOf(n);
 
-    if (hasSpecialSpelling || n % dozensData.properties.mod === 0) {
-      return dozensData.writtenNumbers[n];
+    if (hasSpecialSpelling || n % dozensData.mod === 0) {
+      return dozensData.data[n];
     } else {
-      const spelledDozen = dozensData.writtenNumbers[rounded.dozen];
+      const spelledDozen = dozensData.data[rounded.dozen];
       const spelledRest = this.getSpelledRest(rest, false);
       return `${spelledDozen}-${spelledRest}`;
     }
@@ -86,9 +86,9 @@ export class WrittenNumberFactory implements NumberFactory {
     const { rounded, rest } = this.getPropertiesOfNumber(n);
     const hundredsData = this.getDataOf(n);
     const spelledUnit = this.getUnitOf(rounded.unit);
-    const spelledHundred = `${spelledUnit} ${hundredsData.writtenNumbers[0]}`;
+    const spelledHundred = `${spelledUnit} ${hundredsData.data[0]}`;
 
-    if (n % hundredsData.properties.mod === 0) {
+    if (n % hundredsData.mod === 0) {
       return spelledHundred;
     } else {
       const spelledRest = this.getSpelledRest(rest, true);
@@ -100,9 +100,9 @@ export class WrittenNumberFactory implements NumberFactory {
     const { rounded, rest } = this.getPropertiesOfNumber(n);
     const thousandData = this.getDataOf(n);
     const spelledUnit = this.getUnitOf(rounded.unit);
-    const spelledThousand = `${spelledUnit} ${thousandData.writtenNumbers[0]}`;
+    const spelledThousand = `${spelledUnit} ${thousandData.data[0]}`;
 
-    if (n % thousandData.properties.mod === 0) {
+    if (n % thousandData.mod === 0) {
       return spelledThousand;
     } else {
       const spelledRest = this.getSpelledRest(rest, rest.length <= 2);

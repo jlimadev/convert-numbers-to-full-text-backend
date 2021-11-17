@@ -1,21 +1,17 @@
 export type NumbersProperties = {
-  properties: {
-    digits: number;
-    mod: number;
-    hasSpecialSpelling: boolean;
-  };
-  writtenNumbers: {
+  digits: number;
+  mod: number;
+  hasSpecialSpelling: boolean;
+  data: {
     [n: number]: string;
   };
 };
 
 const units: NumbersProperties = {
-  properties: {
-    digits: 1,
-    mod: 1,
-    hasSpecialSpelling: false,
-  },
-  writtenNumbers: {
+  digits: 1,
+  mod: 1,
+  hasSpecialSpelling: false,
+  data: {
     0: 'zero',
     1: 'one',
     2: 'two',
@@ -30,12 +26,10 @@ const units: NumbersProperties = {
 };
 
 const uniqueDozen: NumbersProperties = {
-  properties: {
-    digits: 2,
-    mod: 10,
-    hasSpecialSpelling: true,
-  },
-  writtenNumbers: {
+  digits: 2,
+  mod: 10,
+  hasSpecialSpelling: true,
+  data: {
     10: 'ten',
     11: 'eleven',
     12: 'twelve',
@@ -50,12 +44,10 @@ const uniqueDozen: NumbersProperties = {
 };
 
 const commonDozen: NumbersProperties = {
-  properties: {
-    digits: 2,
-    mod: 10,
-    hasSpecialSpelling: false,
-  },
-  writtenNumbers: {
+  digits: 2,
+  mod: 10,
+  hasSpecialSpelling: false,
+  data: {
     20: 'twenty',
     30: 'thirty',
     40: 'forty',
@@ -68,23 +60,19 @@ const commonDozen: NumbersProperties = {
 };
 
 const hundreds: NumbersProperties = {
-  properties: {
-    digits: 3,
-    mod: 100,
-    hasSpecialSpelling: false,
-  },
-  writtenNumbers: {
+  digits: 3,
+  mod: 100,
+  hasSpecialSpelling: false,
+  data: {
     0: 'hundred',
   },
 };
 
 const thousands: NumbersProperties = {
-  properties: {
-    digits: 4,
-    mod: 1000,
-    hasSpecialSpelling: false,
-  },
-  writtenNumbers: {
+  digits: 4,
+  mod: 1000,
+  hasSpecialSpelling: false,
+  data: {
     0: 'thousand',
   },
 };

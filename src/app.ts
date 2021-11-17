@@ -1,4 +1,4 @@
-import { writtenNumbersData } from './core/domain/data/NumbersData';
+import { writtenNumbersData } from './core/domain/numbers';
 import { WrittenNumberFactory } from './core/usecases/number-factory/WrittenNumberFactory';
 import { SpellOutNumber } from './core/usecases/spell-out-number/SpellOutNumber';
 
