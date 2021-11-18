@@ -25,7 +25,7 @@ export const units: NumbersProperties = {
   },
 };
 
-const uniqueDozen: NumbersProperties = {
+export const specialDozens: NumbersProperties = {
   digits: 2,
   mod: 10,
   hasSpecialSpelling: true,
@@ -43,7 +43,7 @@ const uniqueDozen: NumbersProperties = {
   },
 };
 
-const commonDozen: NumbersProperties = {
+export const dozens: NumbersProperties = {
   digits: 2,
   mod: 10,
   hasSpecialSpelling: false,
@@ -75,8 +75,8 @@ const thousands: NumbersProperties = {
 
 const writtenNumbersData: Array<NumbersProperties> = [
   units,
-  uniqueDozen,
-  commonDozen,
+  specialDozens,
+  dozens,
   hundreds,
   thousands,
 ];
