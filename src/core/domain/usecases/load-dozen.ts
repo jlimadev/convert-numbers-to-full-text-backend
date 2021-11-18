@@ -1,3 +1,3 @@
 export interface LoadDozen {
-  loadDozen(): string;
+  loadDozen(number: number): string;
 }
