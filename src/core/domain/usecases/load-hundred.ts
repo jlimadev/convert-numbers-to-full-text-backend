@@ -1,3 +1,3 @@
 export interface LoadHundred {
-  loadHundred(): string;
+  loadHundred(number: number): string;
 }
