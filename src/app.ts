@@ -1,15 +1,8 @@
-import { writtenNumbersData } from './core/domain/model/numbers';
-import { WrittenNumberFactory } from './core/data/number-factory/WrittenNumberFactory';
-import { SpellOutNumber } from './core/data/spell-out-number/SpellOutNumber';
+import { ConvertNumberToFullTextUsecase } from './core/usecases/convert-number-to-full-text';
 
 (() => {
-  const numbersFactory = new WrittenNumberFactory(writtenNumbersData);
-  const writeNumbers = new SpellOutNumber(numbersFactory);
-
+  const convertNumberToFullText = new ConvertNumberToFullTextUsecase();
   const numbers = Array.from(Array(10000).keys());
-  const writtenNumbers = numbers.map((number) =>
-    writeNumbers.invokeWith(number),
-  );
-
+  const writtenNumbers = numbers.map((number) => convertNumberToFullText.invoke(number));
   console.log(writtenNumbers.reverse());
 })();
