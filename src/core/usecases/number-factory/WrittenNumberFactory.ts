@@ -45,9 +45,7 @@ export class WrittenNumberFactory implements NumberFactory {
   private getDataOf = (n: number): NumbersProperties => {
     const { length, hasSpecialSpelling } = this.getPropertiesOfNumber(n);
     return this.numbersData.find(
-      (entry) =>
-        entry.digits == length &&
-        entry.hasSpecialSpelling === hasSpecialSpelling,
+      (entry) => entry.digits == length && entry.hasSpecialSpelling === hasSpecialSpelling,
     );
   };
 

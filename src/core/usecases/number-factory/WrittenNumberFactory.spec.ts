@@ -82,9 +82,7 @@ describe('WrittenNumberFactory test suit', () => {
       ];
 
       // Act
-      const result: Array<string> = hundreds.map((number) =>
-        sut.getDozenOf(number),
-      );
+      const result: Array<string> = hundreds.map((number) => sut.getDozenOf(number));
 
       // Assert
       expect(result).toEqual(expectedResult);
@@ -134,9 +132,7 @@ describe('WrittenNumberFactory test suit', () => {
       ];
 
       // Act
-      const result: Array<string> = hundreds.map((number) =>
-        sut.getHundredOf(number),
-      );
+      const result: Array<string> = hundreds.map((number) => sut.getHundredOf(number));
 
       // Assert
       expect(result).toEqual(expectedResult);
@@ -197,10 +193,7 @@ describe('WrittenNumberFactory test suit', () => {
       // Arrange
       const { sut } = makeSut();
       // [1030, 2131, 3232, 4333, 5434, 6535, 7636, 8737, 9838]
-      const thousands = Array.from(
-        Array(9).keys(),
-        (i) => (i + 1) * 1000 + (i * 100 + 30 + i),
-      );
+      const thousands = Array.from(Array(9).keys(), (i) => (i + 1) * 1000 + (i * 100 + 30 + i));
 
       const expectedResult = [
         'one thousand (and) thirty',
