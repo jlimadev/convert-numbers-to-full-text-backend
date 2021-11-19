@@ -1,84 +1,42 @@
 type Data = string | { [n: number]: string };
 
-export type NumbersProperties = {
-  digits: number;
-  mod: number;
-  hasSpecialSpelling: boolean;
-  data: Data;
+export const units: Data = {
+  0: 'zero',
+  1: 'one',
+  2: 'two',
+  3: 'three',
+  4: 'four',
+  5: 'five',
+  6: 'six',
+  7: 'seven',
+  8: 'eight',
+  9: 'nine',
 };
 
-export const units: NumbersProperties = {
-  digits: 1,
-  mod: 1,
-  hasSpecialSpelling: false,
-  data: {
-    0: 'zero',
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-  },
+export const specialDozens: Data = {
+  10: 'ten',
+  11: 'eleven',
+  12: 'twelve',
+  13: 'thirteen',
+  14: 'fourteen',
+  15: 'fifteen',
+  16: 'sixteen',
+  17: 'seventeen',
+  18: 'eighteen',
+  19: 'nineteen',
 };
 
-export const specialDozens: NumbersProperties = {
-  digits: 2,
-  mod: 10,
-  hasSpecialSpelling: true,
-  data: {
-    10: 'ten',
-    11: 'eleven',
-    12: 'twelve',
-    13: 'thirteen',
-    14: 'fourteen',
-    15: 'fifteen',
-    16: 'sixteen',
-    17: 'seventeen',
-    18: 'eighteen',
-    19: 'nineteen',
-  },
+export const dozens: Data = {
+  20: 'twenty',
+  30: 'thirty',
+  40: 'forty',
+  50: 'fifty',
+  60: 'sixty',
+  70: 'seventy',
+  80: 'eighty',
+  90: 'ninety',
 };
 
-export const dozens: NumbersProperties = {
-  digits: 2,
-  mod: 10,
-  hasSpecialSpelling: false,
-  data: {
-    20: 'twenty',
-    30: 'thirty',
-    40: 'forty',
-    50: 'fifty',
-    60: 'sixty',
-    70: 'seventy',
-    80: 'eighty',
-    90: 'ninety',
-  },
-};
+export const hundred: Data = 'hundred';
 
-const hundreds: NumbersProperties = {
-  digits: 3,
-  mod: 100,
-  hasSpecialSpelling: false,
-  data: 'hundred',
-};
-
-const thousands: NumbersProperties = {
-  digits: 4,
-  mod: 1000,
-  hasSpecialSpelling: false,
-  data: 'thousand',
-};
-
-const writtenNumbersData: Array<NumbersProperties> = [
-  units,
-  specialDozens,
-  dozens,
-  hundreds,
-  thousands,
-];
-
-export { writtenNumbersData };
+export const thousand: Data = 'thousand';
