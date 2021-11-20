@@ -1,9 +1,14 @@
 import { ConvertNumberToFullText } from '../../core/domain/protocols';
+import { HttpResponse, notFound, ok } from '../protocols';
 
 export class ConvertNumberToFullTextController {
   constructor(private readonly convertor: ConvertNumberToFullText) {}
 
-  invoke(number: number): string {
-    return this.convertor.invoke(number);
+  handle(number: number): HttpResponse {
+    const fullText = this.convertor.invoke(number);
+    if (!fullText) {
+      return notFound(`Could not find ${number} as full text`);
+    }
+    return ok(fullText);
   }
 }
