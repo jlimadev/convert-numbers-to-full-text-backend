@@ -1,6 +1,6 @@
 import { ConvertNumberToFullTextController } from './convert-number-to-full-text-controller';
 import { ConvertNumberToFullText } from '../../core/domain/protocols';
-import { notFound } from '../protocols';
+import { internalServerError, notFound } from '../protocols';
 
 const makeSut = () => {
   const convertor: ConvertNumberToFullText = {
@@ -23,5 +23,14 @@ describe('ConvertNumberToFullTextController', () => {
     const number = 10;
     const result = sut.handle(number);
     expect(result).toEqual(notFound(`Could not find ${number} as full text`));
+  });
+  it('should return 500 internalServerError if use case throws', () => {
+    const { sut, convertor } = makeSut();
+    jest.spyOn(convertor, 'invoke').mockImplementationOnce(() => {
+      throw new Error('any error');
+    });
+    const number = 10;
+    const result = sut.handle(number);
+    expect(result).toEqual(internalServerError(new Error('any error')));
   });
 });
