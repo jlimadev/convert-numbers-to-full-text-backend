@@ -1,4 +1,4 @@
 export type HttpResponse = {
   statusCode: number;
-  body: string;
+  body: string | Error;
 };

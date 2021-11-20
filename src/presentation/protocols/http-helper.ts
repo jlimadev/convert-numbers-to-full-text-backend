@@ -1,4 +1,5 @@
 import { HttpResponse } from '.';
+import { InternalServerError } from '../errors';
 
 export const notFound = (error: string): HttpResponse => ({
   statusCode: 404,
@@ -7,7 +8,7 @@ export const notFound = (error: string): HttpResponse => ({
 
 export const internalServerError = (error: Error): HttpResponse => ({
   statusCode: 500,
-  body: error.stack,
+  body: new InternalServerError(error.stack),
 });
 
 export const ok = (result: string): HttpResponse => ({
