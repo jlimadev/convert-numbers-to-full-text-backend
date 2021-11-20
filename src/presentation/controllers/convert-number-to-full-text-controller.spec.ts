@@ -1,6 +1,6 @@
 import { ConvertNumberToFullTextController } from './convert-number-to-full-text-controller';
 import { ConvertNumberToFullText } from '../../core/domain/protocols';
-import { internalServerError, notFound } from '../protocols';
+import { internalServerError, notFound, ok } from '../protocols';
 
 const makeSut = () => {
   const convertor: ConvertNumberToFullText = {
@@ -32,5 +32,11 @@ describe('ConvertNumberToFullTextController', () => {
     const number = 10;
     const result = sut.handle(number);
     expect(result).toEqual(internalServerError(new Error('any error')));
+  });
+  it('should return 200 ok when usecase succeeds', () => {
+    const { sut } = makeSut();
+    const number = 10;
+    const result = sut.handle(number);
+    expect(result).toEqual(ok('any-number-as-full-text'));
   });
 });
