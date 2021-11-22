@@ -10,7 +10,7 @@ module.exports = {
     '<rootDir>/dist/',
   ],
 
-  testMatch: ['<rootDir>/**/*.spec.ts'],
+  testMatch: ['<rootDir>/**/*.spec.ts', "<rootDir>/**/*.test.ts"],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/coverage/',
@@ -24,7 +24,7 @@ module.exports = {
   ],
 
   collectCoverage: true,
-  collectCoverageFrom: ['**/*.ts', '!**/jest.config.js', '!**/app.ts', '!**/index.ts'],
+  collectCoverageFrom: ['**/*.ts', '!**/jest.config.js', '!**/server.ts', '!**/index.ts'],
   coverageDirectory: './coverage',
   coverageReporters: ['lcov', 'text'],
   coverageThreshold: {
