@@ -31,9 +31,10 @@ describe('ConvertNumberToFullText - usecase', () => {
       const result = sut.invoke(number);
       expect(result).toBe('two-thousand-one-hundred-thirty-one');
     });
-    it('should throw an error if pass not tracked numbers', () => {
+    it('should return null if number is not tracked', () => {
       const sut = makeSut();
-      expect(() => sut.invoke(999999)).toThrowError('Number not tracked');
+      const result = sut.invoke(999999);
+      expect(result).toBeNull();
     });
   });
   describe('loadUnit', () => {

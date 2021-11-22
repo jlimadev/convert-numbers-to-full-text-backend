@@ -21,7 +21,7 @@ export class ConvertNumberToFullTextUsecase implements ConvertNumberToFullText {
       case 4:
         return this.loadThousand(number);
       default:
-        throw new Error('Number not tracked');
+        return null;
     }
   }
 
