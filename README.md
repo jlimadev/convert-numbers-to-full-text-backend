@@ -1,17 +1,5 @@
 # Spell Out Numbers
-This is a Typescript Project to write down/spell numbers given an input.
-
-A few examples of usage
-
-```typescript
-const numbersFactory = new WrittenNumberFactory(writtenNumbersData);
-const writeNumbers = new SpellOutNumber(numbersFactory);
-
-const numbers = Array.from(Array(999).keys());
-const writtenNumbers = numbers.map((number) =>
-  writeNumbers.invokeWith(number),
-);
-```
+This is a Typescript/NodeJs api where you can call the route with a number and receive it as full text.
 
 ## Install the dependencies
 ```bash
@@ -28,3 +16,9 @@ yarn start
 ```bash
 yarn test
 ```
+
+Route: `/api/full-text/<number>`
+```
+http://localhost:3000/api/full-text/888
+http://localhost:3000/api/full-text/12
+````
