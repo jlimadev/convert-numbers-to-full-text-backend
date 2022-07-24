@@ -11,7 +11,8 @@
     "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
     "debug:watch": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
     "start:dev": "sucrase-node src/main/server.ts",
-    "test": "jest --coverage",
+    "test": "jest --runInBand",
+    "test:cov": "yarn test --coverage",
     "lint": "eslint --config=.eslintrc.json src/**/*.ts",
     "lint:fix": "yarn lint --fix"
   },
