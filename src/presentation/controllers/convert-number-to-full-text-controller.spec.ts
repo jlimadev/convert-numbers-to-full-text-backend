@@ -1,7 +1,7 @@
-import { ConvertNumberToFullTextController } from './convert-number-to-full-text-controller';
-import { ConvertNumberToFullText } from '../../core/domain/protocols';
+import { ConvertNumberToFullText } from '../../core/application/ConvertNumberToFullText';
 import { badRequest, HttpRequest, internalServerError, notFound, ok } from '../http';
 import { Validator } from '../protocols';
+import { ConvertNumberToFullTextController } from './convert-number-to-full-text-controller';
 
 const makeHttpRequest = (number = 10): HttpRequest => ({
   params: {
@@ -13,19 +13,18 @@ const makeSut = () => {
   const numberValidator: Validator = {
     validate: jest.fn().mockReturnValue(null),
   };
-  const convertor: ConvertNumberToFullText = {
-    invoke: jest.fn().mockReturnValue('any-number-as-full-text'),
-  };
+  const convertor = new ConvertNumberToFullText();
   const sut = new ConvertNumberToFullTextController(numberValidator, convertor);
   return { sut, numberValidator, convertor };
 };
 
 describe('ConvertNumberToFullTextController', () => {
   it('should call usecase with correct number', async () => {
-    const { sut, convertor } = makeSut();
+    const { sut } = makeSut();
+    const convertorSpy = jest.spyOn(ConvertNumberToFullText.prototype, 'invoke');
     const httpRequest = makeHttpRequest();
     await sut.handle(httpRequest);
-    expect(convertor.invoke).toHaveBeenCalledWith(10);
+    expect(convertorSpy).toHaveBeenCalledWith(10);
   });
   it('should return 400 (badRequest) if number is invalid', async () => {
     const { sut, numberValidator } = makeSut();
@@ -54,7 +53,7 @@ describe('ConvertNumberToFullTextController', () => {
     const { sut } = makeSut();
     const httpRequest = makeHttpRequest();
     const result = await sut.handle(httpRequest);
-    const expectedResult = { number: 'any-number-as-full-text' };
+    const expectedResult = { number: 'ten' };
     expect(result).toEqual(ok(expectedResult));
   });
 });

@@ -1,5 +1,5 @@
-import { ConvertNumberToFullText } from '../../core/domain/protocols';
-import { HttpResponse, notFound, ok, internalServerError, HttpRequest, badRequest } from '../http';
+import { ConvertNumberToFullText } from '../../core/application/ConvertNumberToFullText';
+import { badRequest, HttpRequest, HttpResponse, internalServerError, notFound, ok } from '../http';
 import { Controller, Validator } from '../protocols';
 
 export class ConvertNumberToFullTextController implements Controller {

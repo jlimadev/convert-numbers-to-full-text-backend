@@ -1,6 +1,5 @@
-import { ConvertNumberToFullText } from '../../../core/domain/protocols';
-import { ConvertNumberToFullTextUsecase } from '../../../core/usecases/convert-number-to-full-text';
+import { ConvertNumberToFullText } from '../../../core/application/ConvertNumberToFullText';
 
-export const makeConvertNumberToFullTextUsecase = (): ConvertNumberToFullText => {
-  return new ConvertNumberToFullTextUsecase();
+export const makeConvertNumberToFullText = (): ConvertNumberToFullText => {
+  return new ConvertNumberToFullText();
 };
