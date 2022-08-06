@@ -1,4 +1,4 @@
-import { ConvertNumberToFullText } from '../../core/application/ConvertNumberToFullText';
+import { ConvertNumberToFullText } from '../../application/ConvertNumberToFullText';
 import { badRequest, HttpRequest, internalServerError, notFound, ok } from '../http';
 import { Validator } from '../protocols';
 import { ConvertNumberToFullTextController } from './convert-number-to-full-text-controller';

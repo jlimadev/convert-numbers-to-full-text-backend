@@ -1,4 +1,4 @@
-import { ConvertNumberToFullText } from '../../../src/core/application/ConvertNumberToFullText';
+import { ConvertNumberToFullText } from '../../../src/application/ConvertNumberToFullText';
 
 const makeSut = () => {
   return new ConvertNumberToFullText();

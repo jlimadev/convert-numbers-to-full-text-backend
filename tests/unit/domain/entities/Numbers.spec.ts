@@ -1,4 +1,4 @@
-import Numbers from '../../../../src/core/domain/entities/Numbers';
+import Numbers from '../../../../src/domain/entities/Numbers';
 
 describe('Numbers', () => {
   describe('getUnit', () => {
