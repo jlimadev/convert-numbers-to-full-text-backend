@@ -6,6 +6,10 @@ const makeSut = () => {
 
 describe('ConvertNumberToFullText', () => {
   describe('invoke', () => {
+    it('should throw an error if number is not tracked', () => {
+      const sut = makeSut();
+      expect(() => sut.invoke(999999)).toThrow(new Error('The number must be between 0 and 9999'));
+    });
     it('should invoke correctly loadUnit when calling with unit number (1 to 9)', () => {
       const sut = makeSut();
       const number = 9;
@@ -29,11 +33,6 @@ describe('ConvertNumberToFullText', () => {
       const number = 2131;
       const result = sut.invoke(number);
       expect(result).toBe('two-thousand-one-hundred-thirty-one');
-    });
-    it('should return null if number is not tracked', () => {
-      const sut = makeSut();
-      const result = sut.invoke(999999);
-      expect(result).toBeNull();
     });
   });
 });
