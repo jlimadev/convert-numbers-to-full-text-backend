@@ -1,4 +1,5 @@
 import { ConvertNumberToFullText } from '../../../src/application/ConvertNumberToFullText';
+import InvalidNumberError from '../../../src/domain/errors/InvalidNumberError';
 
 const makeSut = () => {
   return new ConvertNumberToFullText();
@@ -8,7 +9,9 @@ describe('ConvertNumberToFullText', () => {
   describe('invoke', () => {
     it('should throw an error if number is not tracked', () => {
       const sut = makeSut();
-      expect(() => sut.invoke(999999)).toThrow(new Error('The number must be between 0 and 9999'));
+      expect(() => sut.invoke(999999)).toThrow(
+        new InvalidNumberError('The number must be between 0 and 9999'),
+      );
     });
     it('should invoke correctly loadUnit when calling with unit number (1 to 9)', () => {
       const sut = makeSut();

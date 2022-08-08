@@ -1,4 +1,5 @@
 import Numbers from '../domain/entities/Numbers';
+import InvalidNumberError from '../domain/errors/InvalidNumberError';
 
 export class ConvertNumberToFullText {
   private readonly numbers: Numbers;
@@ -26,7 +27,7 @@ export class ConvertNumberToFullText {
 
   private validateInputNumber(number: number) {
     if (number > this.maxNumberAsFullText)
-      throw new Error(
+      throw new InvalidNumberError(
         `The number must be between ${this.minNumberAsFullText} and ${this.maxNumberAsFullText}`,
       );
   }
