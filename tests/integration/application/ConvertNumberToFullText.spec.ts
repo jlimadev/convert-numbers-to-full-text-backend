@@ -1,5 +1,5 @@
 import { ConvertNumberToFullText } from '../../../src/application/ConvertNumberToFullText';
-import InvalidNumberError from '../../../src/domain/errors/InvalidNumberError';
+import { InvalidNumberError } from '../../../src/domain/errors';
 
 const makeSut = () => {
   return new ConvertNumberToFullText();

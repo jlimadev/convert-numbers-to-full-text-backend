@@ -1,5 +1,5 @@
 import Numbers from '../domain/entities/Numbers';
-import InvalidNumberError from '../domain/errors/InvalidNumberError';
+import { InvalidNumberError } from '../domain/errors';
 
 export class ConvertNumberToFullText {
   private readonly numbers: Numbers;
