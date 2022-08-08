@@ -1,9 +1,11 @@
 import cors from 'cors';
 import express, { Express, json, Request, Response } from 'express';
+import { Server } from 'http';
 import { AllowedMethods, Http } from '../http';
 
 export default class ExpressAdapter implements Http {
   readonly app: Express;
+  private server: Server;
 
   constructor() {
     this.app = express();
@@ -22,7 +24,13 @@ export default class ExpressAdapter implements Http {
     });
   }
 
+  /* istanbul ignore next */
   listen(port: number): void {
-    this.app.listen(3000, () => console.log(`🚀 app is listening on port ${port}`));
+    this.server = this.app.listen(3000, () => console.log(`🚀 app is listening on port ${port}`));
+  }
+
+  /* istanbul ignore next */
+  close() {
+    this.server.close();
   }
 }
