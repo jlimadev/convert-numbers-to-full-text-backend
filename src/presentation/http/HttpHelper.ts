@@ -1,15 +1,10 @@
 import { HttpResponse } from '.';
-import { NotFoundError, InternalServerError } from '../errors';
+import { InternalServerError } from '../errors';
 type Result = { [any: string]: unknown };
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
-  body: error,
-});
-
-export const notFound = (number: number): HttpResponse => ({
-  statusCode: 404,
-  body: new NotFoundError(number),
+  body: error.message,
 });
 
 export const internalServerError = (error: Error): HttpResponse => ({

@@ -3,5 +3,6 @@ export class InternalServerError extends Error {
     super(`Internal Server Error`);
     this.name = 'InternalServerError';
     this.stack = stack;
+    this.message = stack.split('at')[0].trim();
   }
 }

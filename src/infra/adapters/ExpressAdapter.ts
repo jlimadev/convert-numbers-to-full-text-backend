@@ -1,9 +1,9 @@
 import cors from 'cors';
 import express, { Express, json, Request, Response } from 'express';
-import Http, { AllowedMethods } from '../http/http';
+import { AllowedMethods, Http } from '../http';
 
 export default class ExpressAdapter implements Http {
-  private readonly app: Express;
+  readonly app: Express;
 
   constructor() {
     this.app = express();
@@ -13,8 +13,12 @@ export default class ExpressAdapter implements Http {
 
   on(method: AllowedMethods, url: string, callback: Function): void {
     this.app[method](url, async (request: Request, response: Response) => {
-      const output = callback(request.params, request.body);
-      return response.json(output);
+      const output = await callback(request.params, request.body);
+      if (output.statusCode >= 200 && output.statusCode <= 299) {
+        response.status(output.statusCode).json(output);
+      } else {
+        response.status(output.statusCode).json({ error: output.body });
+      }
     });
   }
 
