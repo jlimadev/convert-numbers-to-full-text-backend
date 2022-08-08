@@ -1,3 +1,3 @@
-export * from './http-response';
-export * from './http-request';
-export * from './http-helper';
+export * from './HttpHelper';
+export * from './HttpRequest';
+export * from './HttpResponse';

@@ -16,10 +16,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -28,7 +25,8 @@
       }
     ],
     "no-console": 0,
-    "implicit-arrow-linebreak": 0
+    "implicit-arrow-linebreak": 0,
+    "@typescript-eslint/ban-types": 0
   },
   "settings": {
     "import/resolver": {

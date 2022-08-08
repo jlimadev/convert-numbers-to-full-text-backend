@@ -5,7 +5,6 @@
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "outDir": "./dist",
-    "rootDir": "./src",
     "removeComments": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
@@ -16,6 +15,6 @@
     "sourceMap": true,
     "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src", "tests"],
   "exclude": []
 }
