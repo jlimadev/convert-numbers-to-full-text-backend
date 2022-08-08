@@ -18,7 +18,6 @@ export class ConvertNumberToFullTextController {
         const output = this.convertNumberToFullText.invoke(number);
         return ok({ number: output });
       } catch (error) {
-        console.log(error.name);
         if (error.name === 'InvalidNumberError') return badRequest(error);
         return internalServerError(error);
       }
