@@ -4,13 +4,13 @@ import { Validator } from '../protocols';
 export class NumberInputValidator implements Validator {
   private readonly paramName: string = 'number';
 
-  validate(input: any): Error {
+  validate(input: any): void {
     const number = Number(input);
     if (isNaN(number)) {
-      return new InvalidParamError(this.paramName, `Invalid number: ${input}`);
+      throw new InvalidParamError(this.paramName, `Invalid number: ${input}`);
     }
     if (!Number.isInteger(number)) {
-      return new InvalidParamError(this.paramName, `Invalid number: ${number} must be integer.`);
+      throw new InvalidParamError(this.paramName, `Invalid number: ${number} must be integer.`);
     }
   }
 }
