@@ -16,11 +16,7 @@ export default class ExpressAdapter implements Http {
   on(method: AllowedMethods, url: string, callback: Function): void {
     this.app[method](url, async (request: Request, response: Response) => {
       const output = await callback(request.params, request.body);
-      if (output.statusCode >= 200 && output.statusCode <= 299) {
-        response.status(output.statusCode).json(output);
-      } else {
-        response.status(output.statusCode).json({ error: output.body });
-      }
+      response.status(output.statusCode).json(output);
     });
   }
 
@@ -29,7 +25,6 @@ export default class ExpressAdapter implements Http {
     this.server = this.app.listen(port, () => console.log(`🚀 app is listening on port ${port}`));
   }
 
-  /* istanbul ignore next */
   close() {
     this.server.close();
   }
