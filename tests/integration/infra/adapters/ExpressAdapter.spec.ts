@@ -7,8 +7,8 @@ describe('ExpressAdapter', () => {
   });
   it('should call listen', () => {
     const listenSpy = jest.spyOn(expressAdapter.app, 'listen');
-    expressAdapter.listen(3000);
-    expect(listenSpy).toHaveBeenCalledWith(3000, expect.any(Function));
+    expressAdapter.listen(10000);
+    expect(listenSpy).toHaveBeenCalledWith(10000, expect.any(Function));
   });
   it('it calls the correct method according to what is passed to on', () => {
     const getSpy = jest.spyOn(expressAdapter.app, 'get');
