@@ -20,7 +20,7 @@ yarn start
 yarn test
 ```
 
-Route: `/number/:number`
+Route: `/numbers/:number`
 
 ```
 curl http://localhost:3000/numbers/888
